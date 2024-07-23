@@ -154,6 +154,7 @@ body {
 	border: 1px var(--bs-border-color) solid;
 	background: var(--bs-border-color-tl);
 	padding: 20px;
+	font-family: 'Clear Sans Regular';
 	/* border-radius: 10px; */
 	/* box-shadow: 0 0 20px 0px #3a3a3c6e; */
 }
