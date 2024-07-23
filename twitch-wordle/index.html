@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="jquery/jquery-3.7.1.min.js"></script>
 	<link rel="stylesheet" href="bootstrap/bootstrap.min.css">
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="style.apr.css">
     <title>Twitch Wordle</title>
     <!--<script src="config.js"></script>-->
 	<!--<script src="words.js"></script>-->
@@ -13,9 +13,8 @@
 	<!--<script src="selftmi.js"></script>-->
 </head>
 <body>
-	<div id="wordle-topbar"></div>
 	<div id="wordle-main">
-		<div id="wordle-header">TWITCH WORDLE</div>
+		<div id="wordle-header">TW<div class="goob-holder"><img class="goob" src="assets/goob.png"></div>TCH WORDLE</div>
 		<div id="wordle-container"></div>
 		<div id="player-chat">
 			<div id="player-name"></div>
@@ -76,7 +75,7 @@
 				<div class="mb-3">
 					<input id="setting-tmi-channelname" class="form-control flex-grow-1 me-2" type="text" placeholder="The Channel in which to run TWITCH WORDLE"/>
 					<input id="setting-tmi-oauth" class="form-control flex-grow-1 me-2" type="password" placeholder="Your OAuth Token (including &quot;oauth:&quot;)"/>
-					<!--<small class="form-text text-muted">Reload to apply Channel and OAuth</small>-->
+					<small class="form-text text-muted">Use <a href="https://twitchapps.com/tmi/" target="_blank">TMI OAuth Generator</a> to get your OAuth Password.</small>
 					<button class="btn btn-danger flex-grow-1 mt-3" id="setting-tmi-restartwebsocket">Restart WebSocket</button>
 				</div>
 				<div class="form-check mb-3">
@@ -110,6 +109,7 @@
 				<div class="mb-3">
 					<button class="btn btn-danger me-2" id="setting-reroll-word" disabled>Get a New Word</button><button class="btn btn-danger" id="setting-show-word">Show Current Word</button><span class="ms-2" id="setting-current-word"></span>
 				</div>
+				<small class="form-text text-muted">© 2024 WHIMSICALWEASEL52. All rights reserved. Image assets used with permission.</small>
 			</div>
 		</div>
 	  </div>
