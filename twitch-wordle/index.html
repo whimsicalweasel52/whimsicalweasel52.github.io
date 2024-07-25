@@ -6,10 +6,10 @@
     <script src="jquery/jquery-3.7.1.min.js"></script>
 	<link rel="stylesheet" href="bootstrap/bootstrap.min.css">
 	<link rel="stylesheet" id="main-style" href="style.apr.css">
-	<script>
+	<!--<script>
 		const mainStyle = document.querySelector('link#main-style');
 		mainStyle.href = ((window.location.protocol === 'file:' || window.location.hostname === '127.0.0.1') && !window.location.pathname.includes('closure')) ? 'style.css' : 'style.apr.css';
-	</script>
+	</script>-->
     <title>Twitch Wordle</title>
     <!--<script src="config.js"></script>-->
 	<!--<script src="words.js"></script>-->
@@ -118,7 +118,8 @@
 				<div class="mb-3">
 					<button class="btn btn-danger me-2" id="setting-reroll-word" disabled>Get a New Word</button><button class="btn btn-danger" id="setting-show-word">Show Current Word</button><span class="ms-2" id="setting-current-word"></span>
 				</div>
-				<small class="form-text text-muted">© 2024 WHIMSICALWEASEL52. All rights reserved. Image assets used with permission.</small>
+				<small class="form-text text-muted">© 2024 WHIMSICALWEASEL52. All rights reserved. Image assets used with permission.<br><br>
+				<a href="https://www.flaticon.com/free-icon/open-box_869027" target="_blank">WeaselBox Icon by Freepik on Flaticon</a></small>
 			</div>
 		</div>
 	  </div>
@@ -146,6 +147,28 @@
 		<div id="anim-display-tslash-anim">
 			<div id="anim-display-tslash-anim-top">TOP</div>
 			<div id="anim-display-tslash-anim-ailu">BOTTOM</div>
+		</div>
+	</div>
+	<div id="win-95-displayer">
+		<!--<div id="win-95-displayer-bg"></div>-->
+		<div id="win-95-displayer-windows">
+			<!--<div class="win-95-displayer-window win-95-extrude-border">
+				<div class="win-95-displayer-window-header">
+					<span class="win-95-displayer-window-header-title win-95-font bold">Window Title</span>
+					<button class="win-95-button-close"></button>
+				</div>
+				<div class="win-95-displayer-window-content win-95-font">
+					<span class="d-block w-100 text-center large">HEADER</span>
+					<span class="d-block w-100 text-center medium">SUBHEADER</span>
+					<span class="d-block w-100 text-center">Text Body</span>
+					<div class="d-block w-100 mb-2"></div>
+					<div class="d-flex w-100 justify-content-around">
+						<button class="win-95-button" disabled>Left</button>
+						<button class="win-95-button">Center</button>
+						<button class="win-95-button">Right</button>
+					</div>
+				</div>
+			</div>-->
 		</div>
 	</div>
 	<!--<div id="winner-menu">
