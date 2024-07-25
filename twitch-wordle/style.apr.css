@@ -1,10 +1,3 @@
-/*
-* Prefixed by https://autoprefixer.github.io
-* PostCSS: v8.4.14,
-* Autoprefixer: v10.4.7
-* Browsers: last 4 version
-*/
-
 @font-face {
 	font-family: 'Clear Sans Regular';
 	src: url(assets/ClearSans-Regular.ttf);
@@ -13,6 +6,12 @@
 	font-family: 'Clear Sans Bold';
 	src: url(assets/ClearSans-Bold.ttf);
 }
+
+@font-face {
+	font-family: 'Orbitron Bold';
+	src: url(assets/Orbitron-Bold.ttf);
+}
+
 html, body {
 	font-family: 'Clear Sans Bold';
 	--bs-body-bg: #121213;
@@ -124,16 +123,16 @@ body {
 	margin: 4px;
 	
 	color: #00000000;
-	-webkit-transition: 1s;
-	-o-transition: 1s;
-	transition: 1s;
+	-webkit-transition: color 1s, background 1s;
+	-o-transition: color 1s, background 1s;
+	transition: color 1s, background 1s;
 }
 .wordle-cell.selected {
 	color: #f8f8f8;
 	border-color: #00000000;
-	-webkit-transition: 1s;
-	-o-transition: 1s;
-	transition: 1s;
+	-webkit-transition: color 1s, background 1s;
+	-o-transition: color 1s, background 1s;
+	transition: color 1s, background 1s;
 }
 .correct {
 	background-color: var(--color-correct);
@@ -153,10 +152,15 @@ body {
 	margin-top: 10px;
 	border: 1px var(--bs-border-color) solid;
 	background: var(--bs-border-color-tl);
+	--top-color: #3a3a3c;
+	/* background: linear-gradient(to bottom, var(--top-color) 0%, var(--top-color) 50%, var(--bs-border-color-tl) 50%); */
 	padding: 20px;
 	font-family: 'Clear Sans Regular';
 	/* border-radius: 10px; */
 	/* box-shadow: 0 0 20px 0px #3a3a3c6e; */
+	
+	/* background-size: 100% 200%; */
+	/* background-position: 0% -100%; */
 }
 
 #player-name {
@@ -168,12 +172,15 @@ body {
 #player-chat-list {
 	width: 100%;
 	height: 200px;
-	background: #121213;
+	/* background: #00000042; */
+	background: var(--bs-body-bg);
 	margin-top: 20px;
 	border: solid 1px #3a3a3c;
 	padding: 15px;
 	font-size: 15px;
 	overflow-y: scroll;
+	-webkit-backdrop-filter: blur(10px);
+	        backdrop-filter: blur(10px);
 }
 #player-chat-list::-webkit-scrollbar {
 	display: none;
@@ -474,12 +481,6 @@ img.goob {
 	right: 2px;
 }
 
-@property --rotate-amount {
-	syntax: '<number>';
-	initial-value: 0;
-	inherits: false;
-}
-
 @-webkit-keyframes gooby {
 	0% {
 		-webkit-transform: rotate3d(1, 1, 1, 0deg);
@@ -500,4 +501,106 @@ img.goob {
 		-webkit-transform: rotate3d(1, 1, 1, 360deg);
 		        transform: rotate3d(1, 1, 1, 360deg);
 	}
+}
+
+#anim-display-tslash {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+}
+#anim-display-tslash.show {
+	display: block;
+}
+#anim-display-tslash #anim-display-tslash-bg {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-color: #00000000;
+	-webkit-backdrop-filter: blur(5px) opacity(0);
+	        backdrop-filter: blur(5px) opacity(0);
+	-webkit-transition: background 0.5s, -webkit-backdrop-filter 0.5s;
+	transition: background 0.5s, -webkit-backdrop-filter 0.5s;
+	-o-transition: backdrop-filter 0.5s, background 0.5s;
+	transition: backdrop-filter 0.5s, background 0.5s;
+	transition: backdrop-filter 0.5s, background 0.5s, -webkit-backdrop-filter 0.5s;
+}
+#anim-display-tslash.animation #anim-display-tslash-bg {
+	background-color: #0000005c;
+	-webkit-backdrop-filter: blur(5px) opacity(1);
+	        backdrop-filter: blur(5px) opacity(1);
+	-webkit-transition: background 0.5s, -webkit-backdrop-filter 0.5s;
+	transition: background 0.5s, -webkit-backdrop-filter 0.5s;
+	-o-transition: backdrop-filter 0.5s, background 0.5s;
+	transition: backdrop-filter 0.5s, background 0.5s;
+	transition: backdrop-filter 0.5s, background 0.5s, -webkit-backdrop-filter 0.5s;
+}
+#anim-display-tslash #anim-display-tslash-anim-top, #anim-display-tslash #anim-display-tslash-anim-ailu {
+	font-family: 'Orbitron Bold';
+	font-style: italic;
+	font-size: 70px;
+	opacity: 0;
+	width: auto;
+	height: auto;
+	text-align: center;
+	position: relative;
+}
+#anim-display-tslash #anim-display-tslash-anim-top {
+	--left: -100%;
+}
+#anim-display-tslash #anim-display-tslash-anim-ailu {
+	--left: 100%;
+}
+#anim-display-tslash.animation #anim-display-tslash-anim-top, #anim-display-tslash.animation #anim-display-tslash-anim-ailu {
+	opacity: 1;
+	-webkit-animation: anim-display-tslash-variable 3.5s cubic-bezier(0.97, 0, 0.52, 0.99) forwards -1.45s;
+	        animation: anim-display-tslash-variable 3.5s cubic-bezier(0.97, 0, 0.52, 0.99) forwards -1.45s;
+}
+@-webkit-keyframes anim-display-tslash-variable {
+	0% {
+		left: var(--left);
+	}
+	70% {
+		left: 0;
+	}
+	100% {
+		left: calc(var(--left) * -1);
+	}
+}
+@keyframes anim-display-tslash-variable {
+	0% {
+		left: var(--left);
+	}
+	70% {
+		left: 0;
+	}
+	100% {
+		left: calc(var(--left) * -1);
+	}
+}
+#anim-display-tslash-anim {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	    -ms-flex-direction: column;
+	        flex-direction: column;
+	-ms-flex-wrap: nowrap;
+	    flex-wrap: nowrap;
+	-ms-flex-line-pack: center;
+	    align-content: center;
+	-webkit-box-pack: center;
+	    -ms-flex-pack: center;
+	        justify-content: center;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
 }

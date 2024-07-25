@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="jquery/jquery-3.7.1.min.js"></script>
 	<link rel="stylesheet" href="bootstrap/bootstrap.min.css">
-	<link rel="stylesheet" href="style.apr.css">
+	<link rel="stylesheet" id="main-style" href="style.apr.css">
+	<script>
+		const mainStyle = document.querySelector('link#main-style');
+		mainStyle.href = ((window.location.protocol === 'file:' || window.location.hostname === '127.0.0.1') && !window.location.pathname.includes('closure')) ? 'style.css' : 'style.apr.css';
+	</script>
     <title>Twitch Wordle</title>
     <!--<script src="config.js"></script>-->
 	<!--<script src="words.js"></script>-->
@@ -51,6 +55,7 @@
 		  <div class="modal-body">
 			<p class="d-flex align-items-center">Current Players
 				<span class="ms-auto">
+					<button class="btn btn-secondary" id="btn-players-shuffle">Shuffle</button>
 					<button class="btn btn-danger" id="btn-players-kickall">Kick All</button>
 				</span>
 			</p>
@@ -86,6 +91,10 @@
 					<input class="form-check-input" type="checkbox" value="" id="setting-clear-messages" checked>
 					<label class="form-check-label" for="setting-clear-messages">Clear Messages After Each Game</label>
 				</div>
+				<div class="form-check mb-3">
+					<input class="form-check-input" type="checkbox" value="" id="setting-shuffle-players" checked>
+					<label class="form-check-label" for="setting-shuffle-players">Shuffle Players After Each Game</label>
+				</div>
 				<!--<span>Dictionary</span>
 				<div class="ms-3">
 					<div class="form-check">
@@ -113,6 +122,31 @@
 			</div>
 		</div>
 	  </div>
+	</div>
+	<div class="modal fade" id="bs-popup-modal-ailu-balls-countdown" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title">HEY STANKY!</h5>
+		  </div>
+		  <div class="modal-body">Your balls will dissapear in<br>
+			<h1>
+				<b><span class="text-primary" id="ailu-balls-countdown">Calculating...</span></b>
+			</h1>
+			<img src="assets/e/ailubeChuckle.gif"><img src="assets/e/ailubeChuckle.gif"><img src="assets/e/ailubeChuckle.gif">
+		  </div>
+		</div>
+	  </div>
+	</div>
+	<div style="position: absolute; top: 0; left: 0; width: 0; height: 0; opacity: 0; touch-action: none; pointer-events: none;">
+		<span style="font-family: 'Orbitron Bold';">Preload</span>
+	</div>
+	<div id="anim-display-tslash">
+		<div id="anim-display-tslash-bg"></div>
+		<div id="anim-display-tslash-anim">
+			<div id="anim-display-tslash-anim-top">TOP</div>
+			<div id="anim-display-tslash-anim-ailu">BOTTOM</div>
+		</div>
 	</div>
 	<!--<div id="winner-menu">
 		<div id="winner-menu-background"></div>
