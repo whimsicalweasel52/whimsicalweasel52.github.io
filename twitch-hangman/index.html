@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="jquery/jquery-3.7.1.min.js"></script>
+	<link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" id="main-style" href="style.css">
+	<link rel="stylesheet" id="main-style" href="style.apx.css">
+    <title>Twitch Hangman</title>
+</head>
+<body>
+	<div id="hangman-main">
+		<div id="hangman-header"><b>TW<div class="goob-holder"><img class="goob" src="assets/goob.png"></div>TCH HANGMAN</b></div>
+		<p class="text-center">The pamba evaded over $1.87 million dollars of tax. Help me execute the pamba!</p>
+		<div id="hangman-container">
+			<div id="hangman-gallow-container">
+				<div id="hangman-gallow-img-gallow-container">
+					<img src="assets/goob_stages/gallow.png">
+				</div>
+				<div id="hangman-gallow-goob">
+					<img id="hangman-gallow-goob-stage" src="assets/goob_stages/0.png"></div>
+			</div>
+			<div id="hangman-words-column">
+				<div id="hangman-nonanswers">
+					<div class="letter">A</div>
+					<div class="letter">B</div>
+					<div class="letter">C</div>
+				</div>
+				<div id="hangman-row"></div>
+			</div>
+		</div>
+		<div id="player-chat">
+			<div id="player-name"></div>
+			<div id="player-chat-list"></div>
+			<div id="controls" class="d-flex justify-content-between">
+				<button class="btn btn-success flex-grow-1 me-1" id="game-players">Players</button>
+				<button class="btn btn-primary flex-grow-1 me-1" id="game-start" disabled="true">Start Game</button>
+				<button class="btn btn-danger flex-grow-1 me-1" id="game-end" disabled="true">End Game</button>
+				<button class="btn btn-secondary flex-grow-1" id="game-setting">⚙️</button>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="bs-popup-modal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title"></h5>
+		  </div>
+		  <div class="modal-body"></div>
+		</div>
+	  </div>
+	</div>
+	<div class="modal fade" id="bs-player-modal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title">PLAYERS</h5>
+		  </div>
+		  <div class="modal-body">
+			<p class="d-flex align-items-center">Current Players
+				<span class="ms-auto">
+					<button class="btn btn-secondary" id="btn-players-shuffle">Shuffle</button>
+					<button class="btn btn-danger" id="btn-players-kickall">Kick All</button>
+				</span>
+			</p>
+			<p><div class="modal-body-content-current"></div></p>
+			<p class="d-flex align-items-center">Join Requests
+				<span class="ms-auto">
+					<button class="btn btn-success" id="btn-queue-acceptall">Accept All</button><button class="ms-1 btn btn-danger" id="btn-queue-rejectall">Reject All</button>
+				</span>
+			</p>
+			<div class="modal-body-content-pending"></div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	<div class="modal fade" id="bs-setting-modal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title">SETTINGS</h5>
+		  </div>
+			<div class="modal-body">
+				<div class="mb-3">
+					<input id="setting-tmi-channelname" class="form-control flex-grow-1 me-2" type="text" placeholder="The Channel in which to run TWITCH HANGMAN"/>
+					<input id="setting-tmi-oauth" class="form-control flex-grow-1 me-2" type="password" placeholder="Your OAuth Token (including &quot;oauth:&quot;)"/>
+					<small class="form-text text-muted">Use <a href="https://twitchapps.com/tmi/" target="_blank">TMI OAuth Generator</a> to get your OAuth Password.</small>
+					<button class="btn btn-danger flex-grow-1 mt-3" id="setting-tmi-restartwebsocket">Restart WebSocket</button>
+				</div>
+				<div class="form-check mb-3">
+					<input class="form-check-input" type="checkbox" value="" id="setting-clear-messages" checked>
+					<label class="form-check-label" for="setting-clear-messages">Clear Messages After Each Game</label>
+				</div>
+				<div class="form-check mb-3">
+					<input class="form-check-input" type="checkbox" value="" id="setting-shuffle-players" checked>
+					<label class="form-check-label" for="setting-shuffle-players">Shuffle Players After Each Game</label>
+				</div>
+				<div class="mb-3">
+					<button class="btn btn-danger me-2" id="setting-reroll-word" disabled>Get a New Word</button><button class="btn btn-danger" id="setting-show-word">Show Current Word</button><span class="ms-2" id="setting-current-word"></span>
+				</div>
+				<small class="form-text text-muted">© 2024 WHIMSICALWEASEL52. All rights reserved. Image assets used with permission.</small>
+			</div>
+		</div>
+	  </div>
+	</div>
+	<div style="position: absolute; top: 0; left: 0; width: 0; height: 0; opacity: 0; touch-action: none; pointer-events: none;">
+		<span style="font-family: 'Orbitron Bold';">Preload</span>
+	</div>
+	<div id="anim-display-tslash">
+		<div id="anim-display-tslash-bg"></div>
+		<div id="anim-display-tslash-anim">
+			<div id="anim-display-tslash-anim-top">TOP</div>
+			<div id="anim-display-tslash-anim-ailu">BOTTOM</div>
+		</div>
+	</div>
+    <script src="bootstrap/bootstrap.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
