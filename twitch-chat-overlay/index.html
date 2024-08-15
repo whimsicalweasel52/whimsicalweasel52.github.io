@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+    <head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script src="jquery/jquery-3.7.1.min.js"></script>
+		<link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+		<link rel="stylesheet" id="main-style" href="style.css">
+		<link rel="stylesheet" id="main-style" href="style.apx.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <title>Twitch Chat Overlay</title>
+    </head>
+    <body class="m-4">
+        <!--<h1>TMI Parser Demo</h1>
+        <textarea id="input" class="form-control" style="width: 600px; height: 360px;"></textarea>
+        <p id="output" class="mt-2"></p>
+		<button class="btn btn-primary" id="game-setting">Setting</button>-->
+		
+		<div class="modal fade" id="bs-popup-modal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title"></h5>
+					</div>
+					<div class="modal-body"></div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="bs-setting-modal" tabindex="-1" role="dialog">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h5 class="modal-title">SETTINGS</h5>
+			  </div>
+				<div class="modal-body">
+					<div class="mb-3">
+						<input id="setting-tmi-channelname" class="form-control flex-grow-1 me-2" type="text" placeholder="The Channel in which to run TCHAT"/>
+						<input id="setting-tmi-oauth" class="form-control flex-grow-1 me-2" type="password" placeholder="Your OAuth Token (including &quot;oauth:&quot;)"/>
+						<small class="form-text text-muted">Use <a href="https://twitchapps.com/tmi/" target="_blank">TMI OAuth Generator</a> to get your OAuth Password.</small>
+						<button class="btn btn-danger flex-grow-1 mt-3" id="setting-tmi-restartwebsocket">Restart WebSocket</button>
+					</div>
+					<small class="form-text text-muted">© 2024 WHIMSICALWEASEL52. All rights reserved.</small>
+				</div>
+			</div>
+		  </div>
+		</div>
+		<div id="twitch-chat-container"></div>
+		<script src="bootstrap/bootstrap.min.js"></script>
+        <script src="parser.js"></script>
+        <script src="utility.js"></script>
+        <script src="badges-default.js"></script>
+        <script src="cheermotes-default.js"></script>
+        <script src="index.js"></script>
+        <script src="closure.js"></script>
+    </body>
+</html>

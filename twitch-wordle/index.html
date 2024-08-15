@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="jquery/jquery-3.7.1.min.js"></script>
+	<link rel="stylesheet" href="bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" id="main-style" href="style.apr.css">
+	<!--<script>
+		const mainStyle = document.querySelector('link#main-style');
+		mainStyle.href = ((window.location.protocol === 'file:' || window.location.hostname === '127.0.0.1') && !window.location.pathname.includes('closure')) ? 'style.css' : 'style.apr.css';
+	</script>-->
+    <title>Twitch Wordle</title>
+    <!--<script src="config.js"></script>-->
+	<!--<script src="words.js"></script>-->
+    <!--<script src="logger.js"></script>-->
+	<!--<script src="selftmi.js"></script>-->
+</head>
+<body>
+	<div id="wordle-main">
+		<div id="wordle-header">TW<div class="goob-holder"><img class="goob" src="assets/goob.png"></div>TCH WORDLE</div>
+		<div id="wordle-container"></div>
+		<div id="player-chat">
+			<div id="player-name"></div>
+			<div id="player-chat-list"></div>
+			<div id="controls" class="d-flex justify-content-between">
+				<button class="btn btn-success flex-grow-1 me-1" id="game-players">Players</button>
+				<button class="btn btn-primary flex-grow-1 me-1" id="game-start" disabled="true">Start Game</button>
+				<button class="btn btn-danger flex-grow-1 me-1" id="game-end" disabled="true">End Game</button>
+				<button class="btn btn-secondary flex-grow-1" id="game-setting">⚙️</button>
+			</div>
+		</div>
+		<div id="keyboard-display-center">
+			<div id="keyboard-display-left"></div>
+			<div id="keyboard-display-blocker"></div>
+			<div id="keyboard-display-right"></div>
+		</div>
+	</div>
+	<div class="modal fade" id="bs-popup-modal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title"></h5>
+		  </div>
+		  <div class="modal-body"></div>
+		</div>
+	  </div>
+	</div>
+	<div class="modal fade" id="bs-player-modal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title">PLAYERS</h5>
+		  </div>
+		  <div class="modal-body">
+			<p class="d-flex align-items-center">Current Players
+				<span class="ms-auto">
+					<button class="btn btn-secondary" id="btn-players-shuffle">Shuffle</button>
+					<button class="btn btn-danger" id="btn-players-kickall">Kick All</button>
+				</span>
+			</p>
+			<p><div class="modal-body-content-current"></div></p>
+			<p class="d-flex align-items-center">Join Requests
+				<span class="ms-auto">
+					<button class="btn btn-success" id="btn-queue-acceptall">Accept All</button><button class="ms-1 btn btn-danger" id="btn-queue-rejectall">Reject All</button>
+				</span>
+			</p>
+			<div class="modal-body-content-pending"></div>
+		  </div>
+		</div>
+	  </div>
+	</div>
+	<div class="modal fade" id="bs-setting-modal" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title">SETTINGS</h5>
+		  </div>
+			<div class="modal-body">
+				<div class="mb-3">
+					<input id="setting-tmi-channelname" class="form-control flex-grow-1 me-2" type="text" placeholder="The Channel in which to run TWITCH WORDLE"/>
+					<input id="setting-tmi-oauth" class="form-control flex-grow-1 me-2" type="password" placeholder="Your OAuth Token (including &quot;oauth:&quot;)"/>
+					<small class="form-text text-muted">Use <a href="https://twitchapps.com/tmi/" target="_blank">TMI OAuth Generator</a> to get your OAuth Password.</small>
+					<button class="btn btn-danger flex-grow-1 mt-3" id="setting-tmi-restartwebsocket">Restart WebSocket</button>
+				</div>
+				<div class="form-check mb-3">
+					<input class="form-check-input" type="checkbox" value="" id="setting-dgwapl" checked>
+					<label class="form-check-label" for="setting-dgwapl">Drop Guesses without any Present Letters</label>
+				</div>
+				<div class="form-check mb-3">
+					<input class="form-check-input" type="checkbox" value="" id="setting-clear-messages" checked>
+					<label class="form-check-label" for="setting-clear-messages">Clear Messages After Each Game</label>
+				</div>
+				<div class="form-check mb-3">
+					<input class="form-check-input" type="checkbox" value="" id="setting-shuffle-players" checked>
+					<label class="form-check-label" for="setting-shuffle-players">Shuffle Players After Each Game</label>
+				</div>
+				<!--<span>Dictionary</span>
+				<div class="ms-3">
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="setting-dictionary" id="setting-dictionary-1">
+						<label class="form-check-label" for="setting-dictionary-1">Default Wordle Dictionary</label>
+					</div>
+					<div class="form-check">
+						<input class="form-check-input" type="radio" name="setting-dictionary" id="setting-dictionary-2">
+						<label class="form-check-label" for="setting-dictionary-2">Custom Dictionary</label>
+					</div>
+				</div>
+				<div id="custom-dictionary-container" class="ms-3 mb-3 opacity-50 pe-none">
+					<ul class="list-group">
+						<li class="list-group-item d-flex justify-content-between p-2">
+							<input class="form-control flex-grow-1 me-2"/>
+							<button class="btn btn-danger flex-grow-1">-</button>
+						</li>
+					</ul>
+					<button class="btn btn-success w-100">+</button>
+				</div>-->
+				<div class="mb-3">
+					<button class="btn btn-danger me-2" id="setting-reroll-word" disabled>Get a New Word</button><button class="btn btn-danger" id="setting-show-word">Show Current Word</button><span class="ms-2" id="setting-current-word"></span>
+				</div>
+				<small class="form-text text-muted">© 2024 WHIMSICALWEASEL52. All rights reserved. Image assets used with permission.<br><br>
+				<a href="https://www.flaticon.com/free-icon/open-box_869027" target="_blank">WeaselBox Icon by Freepik on Flaticon</a></small>
+			</div>
+		</div>
+	  </div>
+	</div>
+	<div class="modal fade" id="bs-popup-modal-ailu-balls-countdown" tabindex="-1" role="dialog">
+	  <div class="modal-dialog" role="document">
+		<div class="modal-content">
+		  <div class="modal-header">
+			<h5 class="modal-title">HEY STANKY!</h5>
+		  </div>
+		  <div class="modal-body">Your balls will dissapear in<br>
+			<h1>
+				<b><span class="text-primary" id="ailu-balls-countdown">Calculating...</span></b>
+			</h1>
+			<img src="assets/e/ailubeChuckle.gif"><img src="assets/e/ailubeChuckle.gif"><img src="assets/e/ailubeChuckle.gif">
+		  </div>
+		</div>
+	  </div>
+	</div>
+	<div style="position: absolute; top: 0; left: 0; width: 0; height: 0; opacity: 0; touch-action: none; pointer-events: none;">
+		<span style="font-family: 'Orbitron Bold';">Preload</span>
+	</div>
+	<div id="anim-display-tslash">
+		<div id="anim-display-tslash-bg"></div>
+		<div id="anim-display-tslash-anim">
+			<div id="anim-display-tslash-anim-top">TOP</div>
+			<div id="anim-display-tslash-anim-ailu">BOTTOM</div>
+		</div>
+	</div>
+	<div id="win-95-displayer">
+		<!--<div id="win-95-displayer-bg"></div>-->
+		<div id="win-95-displayer-windows">
+			<!--<div class="win-95-displayer-window win-95-extrude-border">
+				<div class="win-95-displayer-window-header">
+					<span class="win-95-displayer-window-header-title win-95-font bold">Window Title</span>
+					<button class="win-95-button-close"></button>
+				</div>
+				<div class="win-95-displayer-window-content win-95-font">
+					<span class="d-block w-100 text-center large">HEADER</span>
+					<span class="d-block w-100 text-center medium">SUBHEADER</span>
+					<span class="d-block w-100 text-center">Text Body</span>
+					<div class="d-block w-100 mb-2"></div>
+					<div class="d-flex w-100 justify-content-around">
+						<button class="win-95-button" disabled>Left</button>
+						<button class="win-95-button">Center</button>
+						<button class="win-95-button">Right</button>
+					</div>
+				</div>
+			</div>-->
+		</div>
+	</div>
+	<!--<div id="winner-menu">
+		<div id="winner-menu-background"></div>
+		<div id="winner-menu-window-container">
+			<div id="winner-menu-window">
+				<h2>THE WINNER IS</h2>
+				<h3>WHIMSICALWEASEL52!!</h3>
+			</div>
+		</div>
+	</div>-->
+    <!--<script src="wordle.js"></script>-->
+    <!--<script src="index.js"></script>-->
+    <script src="script.js"></script>
+    <script src="bootstrap/bootstrap.min.js"></script>
+</body>
+</html>
