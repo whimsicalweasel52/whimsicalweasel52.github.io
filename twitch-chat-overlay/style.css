@@ -5,13 +5,16 @@
 
 :root {
 	--lighten-color: #ffffff29;
-	--scale: 3;
 }
 
 html,
 body {
 	overflow: hidden;
 	background-color: rgba(0, 0, 0, 0) !important;
+}
+
+html {
+	--scale: 3;
 }
 
 div,
@@ -30,10 +33,29 @@ div.modal-dialog {
 	justify-content: center;
 	align-items: center;
 	overflow-y: auto;
+
+	/* width: max-content; */
+	/* max-width: 25vw; */
 }
-div.modal {
+
+/*div.modal {
 	transform: scale(var(--scale));
-} 
+}*/
+div.modal-dialog {
+	margin: 0px;
+	width: 100%;
+	max-width: 100%;
+	display: flex;
+	flex-flow: row;
+	place-content: center;
+	align-items: center;
+	transform: scale(0.75);
+}
+
+div.modal-content {
+	width: max-content;
+	max-width: 500px;
+}
 
 div#twitch-chat-container {
 	display: flex;
@@ -51,6 +73,7 @@ div#twitch-chat-container {
 	/* text-shadow: 0 0 50px #000000b3; */
 	color: #ffffff;
 }
+
 div#twitch-chat-container::-webkit-scrollbar {
 	display: none;
 	opacity: 0;
@@ -69,6 +92,7 @@ div#twitch-chat-container::-webkit-scrollbar {
 .emote {
 	pointer-events: none;
 }
+
 .bit {
 	pointer-events: none;
 	font-weight: 700;

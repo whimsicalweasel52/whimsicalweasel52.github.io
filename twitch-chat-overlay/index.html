@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
-    <head>
+	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script src="jquery/jquery-3.7.1.min.js"></script>
 		<link rel="stylesheet" href="bootstrap/bootstrap.min.css">
 		<link rel="stylesheet" id="main-style" href="style.css">
 		<link rel="stylesheet" id="main-style" href="style.apx.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <title>Twitch Chat Overlay</title>
-    </head>
-    <body class="m-4">
-        <!--<h1>TMI Parser Demo</h1>
-        <textarea id="input" class="form-control" style="width: 600px; height: 360px;"></textarea>
-        <p id="output" class="mt-2"></p>
-		<button class="btn btn-primary" id="game-setting">Setting</button>-->
-		
-		<div class="modal fade" id="bs-popup-modal" tabindex="-1" role="dialog">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+		<title>Twitch Chat Overlay</title>
+	</head>
+	<body class="m-4">
+		<!--<h1>TMI Parser Demo</h1>
+			<textarea id="input" class="form-control" style="width: 600px; height: 360px;"></textarea>
+			<p id="output" class="mt-2"></p>
+			<button class="btn btn-primary" id="game-setting">Setting</button>-->
+
+		<div class="modal fade show" id="bs-popup-modal" tabindex="-1" role="dialog">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -26,31 +26,45 @@
 				</div>
 			</div>
 		</div>
-		<div class="modal fade" id="bs-setting-modal" tabindex="-1" role="dialog">
-		  <div class="modal-dialog" role="document">
-			<div class="modal-content">
-			  <div class="modal-header">
-				<h5 class="modal-title">SETTINGS</h5>
-			  </div>
-				<div class="modal-body">
-					<div class="mb-3">
-						<input id="setting-tmi-channelname" class="form-control flex-grow-1 me-2" type="text" placeholder="The Channel in which to run TCHAT"/>
-						<input id="setting-tmi-oauth" class="form-control flex-grow-1 me-2" type="password" placeholder="Your OAuth Token (including &quot;oauth:&quot;)"/>
-						<small class="form-text text-muted">Use <a href="https://twitchapps.com/tmi/" target="_blank">TMI OAuth Generator</a> to get your OAuth Password.</small>
-						<button class="btn btn-danger flex-grow-1 mt-3" id="setting-tmi-restartwebsocket">Restart WebSocket</button>
+		<div class="modal fade show" id="bs-setting-modal" tabindex="-1" role="dialog">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title">SETTINGS</h5>
 					</div>
-					<small class="form-text text-muted">© 2024 WHIMSICALWEASEL52. All rights reserved.</small>
+					<div class="modal-body">
+						<div class="mb-3">
+							<div class="mb-3">
+								<input id="setting-tmi-channelname" class="form-control flex-grow-1 me-2" type="text" placeholder="The Channel in which to run TCHAT" />
+								<input id="setting-tmi-oauth" class="form-control flex-grow-1 me-2" type="password" placeholder="Your OAuth Token (including &quot;oauth:&quot;)" />
+								<small class="form-text text-muted">Use <a href="https://twitchapps.com/tmi/" target="_blank">TMI OAuth Generator</a> to get your OAuth Password.</small>
+								<button class="d-block btn btn-danger flex-grow-1 mt-3" id="setting-tmi-restartwebsocket">Restart WebSocket</button>
+							</div>
+							<div class="mb-3">
+								<input id="setting-chat-size" class="form-control flex-grow-1 me-2" type="number" step="0.1" placeholder="Scale Multiplier" />
+								<small class="form-text text-muted">How large the page is rendered. Larger number = better quality. Remember to adjust your OBS Browser size! Default is 3.</small>
+							</div>
+							<div class="mb-3">
+								<input id="setting-chat-autodelete" class="form-control flex-grow-1 me-2" type="number" step="0.5" placeholder="Message Clear Time" />
+								<small class="form-text text-muted">How long until a message in chat automatically disappears in seconds. Negative number for non-clearing chat. Default is 30.</small>
+							</div>
+							<div class="mb-3">
+								<button class="d-block btn btn-danger flex-grow-1 mt-3" id="setting-chat-clear">Clear Chatbox</button>
+								<small class="form-text text-muted">Only clears the chatbox, not your Twitch Chat.</small>
+							</div>
+						</div>
+						<small class="form-text text-muted">© 2024 WHIMSICALWEASEL52. All rights reserved.</small>
+					</div>
 				</div>
 			</div>
-		  </div>
 		</div>
 		<div id="twitch-chat-container"></div>
 		<script src="bootstrap/bootstrap.min.js"></script>
-        <script src="parser.js"></script>
-        <script src="utility.js"></script>
-        <script src="badges-default.js"></script>
-        <script src="cheermotes-default.js"></script>
-        <script src="index.js"></script>
-        <script src="closure.js"></script>
-    </body>
+		<script src="parser.js"></script>
+		<script src="utility.js"></script>
+		<script src="badges-default.js"></script>
+		<script src="cheermotes-default.js"></script>
+		<script src="index.js"></script>
+		<script src="closure.js"></script>
+	</body>
 </html>
