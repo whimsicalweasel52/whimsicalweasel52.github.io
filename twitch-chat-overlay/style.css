@@ -22,6 +22,14 @@ span {
 	font-family: "Inter";
 	overflow-wrap: anywhere;
 }
+.nowrap,
+.nowrap div,
+.nowrap span {
+	font-family: "Inter";
+	overflow-wrap: unset;
+	overflow: visible;
+	white-space: pre;
+}
 
 div.modal-dialog {
 	height: auto;
